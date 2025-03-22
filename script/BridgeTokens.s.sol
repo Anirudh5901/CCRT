@@ -5,15 +5,20 @@ pragma solidity ^0.8.18;
 import {Script} from "../lib/forge-std/src/Script.sol";
 import {IRouterClient} from "../lib/ccip/contracts/src/v0.8/ccip/interfaces/IRouterClient.sol";
 import {Client} from "../lib/ccip/contracts/src/v0.8/ccip/libraries/Client.sol";
-import {IERC20} from "../lib/ccip/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/interfaces/IERC20.sol";
+import {IERC20} from
+    "../lib/ccip/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/interfaces/IERC20.sol";
 
 contract BridgeTokensScript is Script {
-    function run(address receiverAddress, uint64 destinationChainSelector, address tokenToSendAddress, uint256 amountToSend, address linkTokenAddress, address routerAddress) public {
+    function run(
+        address receiverAddress,
+        uint64 destinationChainSelector,
+        address tokenToSendAddress,
+        uint256 amountToSend,
+        address linkTokenAddress,
+        address routerAddress
+    ) public {
         Client.EVMTokenAmount[] memory tokenAmounts = new Client.EVMTokenAmount[](1);
-        tokenAmounts[0] = Client.EVMTokenAmount({
-            token: tokenToSendAddress,
-            amount: amountToSend
-        });
+        tokenAmounts[0] = Client.EVMTokenAmount({token: tokenToSendAddress, amount: amountToSend});
         vm.startBroadcast();
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             receiver: abi.encode(receiverAddress),
