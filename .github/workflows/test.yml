@@ -18,9 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          path: w
           submodules: recursive
 
       - name: Install Foundry
+        run: |
+          cd w
+          curl -L https://foundry.paradigm.xyz | bash
+          foundryup
         uses: foundry-rs/foundry-toolchain@v1
 
       - name: Show Forge version
@@ -42,5 +47,6 @@ jobs:
           SEPOLIA_ETH_RPC_URL: ${{ secrets.SEPOLIA_ETH_RPC_URL }}
           ARB_SEPOLIA_RPC_URL: ${{ secrets.ARB_SEPOLIA_RPC_URL }}
         run: |
+          cd w
           forge test -vvv
         id: test
