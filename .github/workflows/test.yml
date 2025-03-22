@@ -38,6 +38,9 @@ jobs:
         id: build
 
       - name: Run Forge tests
+        env:
+          SEPOLIA_ETH_RPC_URL: ${{ secrets.SEPOLIA_ETH_RPC_URL }}
+          ARB_SEPOLIA_RPC_URL: ${{ secrets.ARB_SEPOLIA_RPC_URL }}
         run: |
           forge test -vvv
         id: test
