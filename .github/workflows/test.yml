@@ -22,10 +22,7 @@ jobs:
           submodules: recursive
 
       - name: Install Foundry
-        run: |
-          cd w
-          curl -L https://foundry.paradigm.xyz | bash
-          foundryup
+        uses: foundry-rs/foundry-toolchain@v1
 
       - name: Show Forge version
         run: |
