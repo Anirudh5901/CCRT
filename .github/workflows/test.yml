@@ -38,11 +38,15 @@ jobs:
           forge build --sizes
         id: build
 
+      - name: Debug working directory
+        run: |
+          pwd
+          ls -la
+
       - name: Run Forge tests
         env:
           SEPOLIA_ETH_RPC_URL: ${{ secrets.SEPOLIA_ETH_RPC_URL }}
           ARB_SEPOLIA_RPC_URL: ${{ secrets.ARB_SEPOLIA_RPC_URL }}
         run: |
-          cd w
           forge test -vvv
         id: test
